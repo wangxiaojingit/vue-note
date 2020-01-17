@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父组件向子组件传值</title>
+</head>
+<body>
+    <div id="app">
+        <hello-word @changevote="getNum"></hello-word>
+        投票总数：<span id="total"></span>
+
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+var helloWord={
+    data(){
+       return{
+           msg:"贾玲是个优秀的小品演员",
+           num:0
+       }
+    },
+    template:`<div>
+           <h1>{{msg}}</h1>
+           <button @click="vote">{{num}}</button>
+    </div>`,
+    methods:{
+        vote:function(){
+            this.num+=1;
+            this.$emit("changevote")
+        }
+    }
+}    
+var app=new Vue({
+    el:"#app",
+    data:{
+
+    },
+    components:{
+        "hello-word":helloWord
+    },
+    methods:{
+        getNum:function(){
+           alert("hello");
+        }
+    }
+})
+
+
+</script>

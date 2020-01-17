@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <article2 :title="title" @changetitle="changetitle"></article2>
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+   var app=new Vue({
+       el:"#app",
+       data:{
+         title:"标题一"
+       },
+       methods:{
+            changetitle(msg){
+              this.title=msg;
+            }
+       },
+       components:{
+           "article2":{
+               props:["title"],
+               template:`<div>
+                  <h3>{{title}}</h3>
+                  <button @click="change">修改title</button>
+               </div>`,
+               data(){
+                  return{
+                    msg:"贾玲是美女"
+                  } 
+               },
+               methods:{
+                 change(){
+                     this.$emit("changetitle",this.msg);
+                 }
+               }
+           }
+       }
+   })
+</script>

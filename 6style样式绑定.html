@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:100px;
+            height:100px;
+            border:1px solid green;
+        }
+        .bg{
+            background:yellow;
+        }
+        .color{
+            color:red;
+        }
+        .fz{
+            font-size:22px;
+        }
+        .color2{
+            color:green;
+        }
+    </style>
+    
+</head>
+<body>
+   <div id="app">
+       <!-- 对象形式的类名绑定 -->
+       <div :style="{width:'100px',height:'100px',background:'yellow'}">box1</div>
+       <div :style="[style1,style2]">box1</div>
+       
+      
+   </div> 
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+     var app =new Vue({
+         el:"#app",
+         data:{
+             style1:{
+                width:"100px",
+                height:"100px",
+             },
+             style2:{
+                background:'yellow'
+             }
+            
+         }
+     })
+</script>

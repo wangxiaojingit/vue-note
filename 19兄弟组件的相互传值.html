@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <helloa></helloa>
+        <hellob></hellob>
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+   var bus=new Vue(); 
+   Vue.component("helloa",{
+       template:`<div>
+           hello
+           <button @click="change(3)">点击</button>
+       </div>`,
+       data(){
+           return {
+               msg:"hello"
+           }
+       },
+       methods:{
+         change(num){
+            alert("num:"+num);
+            bus.$emit("tob",this.msg);
+         }
+       }
+   });
+   Vue.component("hellob",{
+       template:`
+         <div>{{messageb}}</div>
+       `,
+       data(){
+           return {
+               messageb:"b"
+           }
+       },
+       mounted(){
+         var _this=this;
+          bus.$on("tob",function(val){
+             _this.messageb=val;
+          }) 
+       }
+   })
+   var app=new Vue({
+       el:"#app",
+      
+
+   })
+
+</script>

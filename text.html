@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <rabbit></rabbit>
+    </div>
+    
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+new Vue({
+    // 选择根元素
+    el: '#app',
+    // 创建组件，
+    // components，注意末尾有 ‘s’，
+    // 而全局组件是不用家 ‘s’ 的。
+    // 这意味着，components 里可以创建多个组件。
+    components: {    
+      // 定义组件名
+      'rabbit': {
+  
+        // 组件结构
+        template: `<button>{{msg}}</button>`,
+  
+        // data数据
+        data: function() {
+          return {
+            msg: 'Rabbit'
+          }
+        }
+      }
+    }
+  })
+
+</script>

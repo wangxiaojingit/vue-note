@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input v-on:keyup.aa="handdle">点击</input>
+        <input v-on:keyup.65="handdle">点击</input>
+    </div>
+    
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+  // 可以自定义修饰符按键  
+  Vue.config.keyCodes.aa=65;
+  var app=new Vue({
+           el:"#app",
+           methods:{
+            handdle(event){
+                 //event 中对应的有keycode
+                 console.log(event.keyCode);
+            }
+           }
+  })
+</script>

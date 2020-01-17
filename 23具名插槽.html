@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <base-lay-out>
+           <template slot="header">投票标题</template>
+            贾玲是美女吗？
+           颜如晶出色吗？
+           <template slot="footer">公平公正的去投票</template>
+        </base-lay-out>
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+   Vue.component("baseLayOut",{
+                template:`
+                  <div>
+                     <header>
+                        <slot name="header"></slot>
+                     </header>
+                     <main>
+                        <slot ></slot>
+                     </main>
+                     <foot>
+                        <slot name="footer"></slot>
+                     </foot>
+                  </div>
+                `
+   }) 
+   var app=new Vue({
+       el:"#app",
+       data:{
+
+       }
+   })
+</script>

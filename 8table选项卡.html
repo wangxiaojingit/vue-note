@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            background:darkcyan;
+        }
+        .clearfix::after{
+            content:"";
+            display:block;
+            height:0;
+            visibility: hidden;
+            font-size:"";
+            clear: both;
+
+        }
+        ul,li{
+            list-style: none;
+        }
+        .tab{
+            width:500px;
+            margin:0 auto;
+        }
+        .tab li{
+            width:33.3%;
+            height:50px;
+            line-height: 50px;
+            border:1px solid yellow;
+            box-sizing: border-box;
+            float:left;
+            text-align: center;
+            position:relative;
+            top:1px;
+        }
+        .tab>div{
+            height:300px;
+            line-height: 300px;
+            text-align: center;
+            border:1px solid yellow;
+            display:none;
+        }
+        .tab li.current{
+            background:lightcoral;
+        }
+        .tab>div.current{
+            display:block;
+        }
+    </style>
+    
+</head>
+<body>
+   <div id="app">
+      <div class="tab">
+          <ul class="clearfix">
+              <li :class="{'current':currentIndex==index}" v-for="(item,index) in tabAry" @click="hannddle(index)">
+                  {{item.title}}
+              </li>
+          </ul>
+          <div :class="{'current':currentIndex==index}"  v-for="(item,index) in tabAry">
+              {{item.contentText}}
+          </div>
+        
+      </div>
+   </div> 
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+     var app =new Vue({
+         el:"#app",
+         data:{
+             tabAry:[{
+                 "id":1,
+                 "title":"tab1",
+                 "contentText":"tab1内容"
+             },
+             {   "id":2,
+                 "title":"tab2",
+                 "contentText":"tab2内容"
+             },{
+                 "id":3,
+                 "title":"tab3",
+                 "contentText":"tab3内容" 
+             }],
+             currentIndex:"0",
+         },
+         methods:{
+            hannddle(index){
+               this.currentIndex=index;
+            }
+         }
+     })
+</script>

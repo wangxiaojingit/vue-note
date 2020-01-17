@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div v-for="item in dataList">
+            {{item}}
+        </div>
+        <div>名字{{obj.name}}</div>
+        <div>年龄{{obj.age}}</div>
+        <div>年龄{{obj.info}}</div>
+        
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+var app=new Vue({
+    el:"#app",
+    data:{
+        obj:{
+            name:"lili",
+            age:"19"
+        }
+    }
+    
+})
+/* 
+  修改响应式数据：数组中直接通过更改索引的方式并不能实现响应式修改，我们可以通过下面的两种方式
+
+*/
+ app.dataList[1]="aa";
+ Vue.set(app.dataList,1,"boluo");
+ app.$set(app.dataList,0,"0");
+ /* 
+   如果想要修改对象obj中没有写在data里面的属性值，并不能动态的反应到页面上，想要响应式的修改,可以使用Vue.set 或者app.$set,之后再控制台再进行修改这个obj.info 这个属性就是相应式的了。
+ */
+ //app.obj.info="信息"
+ Vue.set(app.obj,"info","信息");
+ app.$set(app.obj,"info","xinxi");
+</script>

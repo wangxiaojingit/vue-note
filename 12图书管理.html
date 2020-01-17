@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .main {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .search {
+            padding: 20px 0px;
+            background: lightgoldenrodyellow;
+            box-sizing: border-box;
+
+        }
+
+        .search input {
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .search span {
+            margin-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h3>图书管理</h3>
+        <div class="main">
+            <div class="search">
+                <span>编号：</span>
+                <input type="text" v-model="curId" :disabled="disabledFlag">
+                <span>名称：</span>
+                <input type="text" 
+                v-model="curName"
+                @input="getName"
+                >
+                <button @click="add" :disabled="disabledflag2">提交</button>
+            </div>
+            <table border="1" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="(item) in lists">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.time}}</td>
+                    <td>
+                        <a href="" @click.prevent="change(item)">修改</a>
+                        <a href="" @click.prevent="remove(item)">删除</a>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="vue.js"></script>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            lists: [
+                {
+                    id: 1,
+                    name: "三国演义1",
+                    time: "2018.1.15",
+                },
+                {
+                    id: 2,
+                    name: "三国演义2",
+                    time: "2018.1.15",
+                },
+                {
+                    id: 3,
+                    name: "三国演义3",
+                    time: "2018.1.15",
+                }
+            ],
+            curId: "", // 当前编辑的id
+            curName: "", // 当前编辑的name
+            editorFlag:false,// 判断是否在编辑状态
+            disabledFlag:false,
+            disabledflag2:false,
+        },
+        methods: {
+            add: function () {
+                 if(this.editorFlag){
+                     // 处于编辑状态，找到对应修改的那一项，把数据的值给改了
+                    var index=this.lists.findIndex((item)=>{
+                           return item.id==this.curId;
+                     });
+                     this.lists[index].name=this.curName;
+                     // 修改完成之后记得清空
+                     this.curName="";
+                     this.curId="";
+                 }else{
+                    var obj = {};
+                    obj.id = this.curId;
+                    obj.name = this.curName;
+                    obj.time = "";
+                    this.lists.push(obj);
+                 }
+                
+            },
+            change: function (item) {
+                this.curId = item.id;
+                this.curName = item.name;
+                // 处于编辑状态
+                this.editorFlag=true;
+                this.disabledFlag=true;
+              
+            },
+            remove:function(item){
+                 this.lists.forEach((aa,index)=>{
+                        if(item==aa){
+                            this.lists.splice(index,1);
+                        } ;
+                 })
+            },
+            getName:function(event){
+                  var value= console.log(event.target.value);
+                  this.disabledflag2= this.lists.some((item)=>{
+                     return item.name==this.curName;
+                  });
+                  
+            }
+        }
+    })
+</script>

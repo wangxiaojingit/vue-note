@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <vote>颜如晶留金桔</vote>   
+        <vote></vote>
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+   Vue.component("vote",{
+       template:`
+         <div>
+            <h3>投票案例</h3>
+            <slot>投票的人数：999</slot>
+         </div>
+       `
+   }) 
+   var app=new Vue({
+       el:"#app"
+   })
+</script>

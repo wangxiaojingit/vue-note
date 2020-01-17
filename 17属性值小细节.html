@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父组件向子组件传值</title>
+</head>
+<body>
+    <div id="app">
+        <hello-word title="父组件" :title2="100"></hello-word>
+        <hello-word title="父组件" title2="100"></hello-word>
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+
+
+var hello={
+    props:["title","title2"],
+    data(){
+      return {
+          msg:"hello"
+      }
+    },
+    template:`<div>
+       {{typeof title2}} 
+    </div>
+    `
+} 
+var app=new Vue({
+    el:"#app",
+    data:{
+        title2:"父组件title2"
+    },
+    components:{
+        "hello-word":hello
+    }
+})
+</script>

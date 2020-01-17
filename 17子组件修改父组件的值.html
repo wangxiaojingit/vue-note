@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子组件更改父组件</title>
+</head>
+<body>
+    <div id="app">
+      <hello :title=title></hello> 
+    </div>
+</body>
+</html>
+<script src="vue.js"></script>
+<script>
+/* 
+  父组件给子组件传值，通过props可以做到，如果子组件想要更改父组件同样可以实现，不过传值是单项数据流，虽然可以实现，不要这样去更改
+
+  下面的案例，我们可以看到子组件直接修改props是可以的，但是不要这样去做，是单项数据流。
+
+*/
+new Vue({
+    el:"#app",
+    data:{
+        msg:"hello",
+        title:"贾玲是一个优秀的小品演员吗?"
+    },
+    components:{
+        "hello":{
+            props:["title"],
+            template: `<div>
+                <h3>{{title}}</h3>
+                <button @click="change">更改title</button>
+             </div>
+            `,
+            data(){
+                return{
+                    msg:"贾玲最棒！"
+                }
+            },
+            methods:{
+                change(){
+                    this.title=this.msg;
+                }
+            }
+        }
+    }
+})
+
+
+
+</script>
